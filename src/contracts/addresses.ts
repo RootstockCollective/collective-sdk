@@ -7,13 +7,15 @@ import {
 } from '@rsksmart/sdk-base'
 
 /**
- * Collective-specific contract addresses (BackersManager, BuilderRegistry)
+ * Collective-specific contract addresses
  */
 export interface CollectiveContractAddresses {
   /** Backers Manager contract */
   backersManager: Address
   /** Builder Registry contract */
   builderRegistry: Address
+  /** Governor contract (DAO governance) */
+  governor: Address
 }
 
 /**
@@ -27,6 +29,7 @@ export interface ContractAddresses extends TokenAddresses, CollectiveContractAdd
 const mainnetCollectiveAddresses: CollectiveContractAddresses = {
   backersManager: '0x7995C48D987941291d8008695A4133E557a11530' as Address,
   builderRegistry: '0x8cb62c58AC3D1253c6467537FDDc563857eD76cb' as Address,
+  governor: '0x71ac6ff904a17f50f2c07b693376ccc1c92627f0' as Address,
 }
 
 /**
@@ -35,6 +38,7 @@ const mainnetCollectiveAddresses: CollectiveContractAddresses = {
 const testnetCollectiveAddresses: CollectiveContractAddresses = {
   backersManager: '0x70AC0FE4F8BCA42Aa7e713E1EDA2E8166d0f8Ed8' as Address,
   builderRegistry: '0xad125E6D5C3B84329fa2466A8A6955F67906F4b2' as Address,
+  governor: '0xB1A39B8f57A55d1429324EEb1564122806eb297F' as Address,
 }
 
 /**

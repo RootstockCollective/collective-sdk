@@ -23,10 +23,20 @@ import {
   type UnclaimedRewards,
   type VotingPower,
 } from './holdings'
+import {
+  getGovernorStats,
+  getProposals,
+  getProposal,
+  getProposalDetails,
+  type GovernorStats,
+  type ProposalsListResult,
+  type Proposal,
+} from './proposals'
 import type {
   CollectiveConfig,
   BackingModule,
   HoldingsModule,
+  ProposalsModule,
   AvailableForBacking,
   TotalBacking,
   BackersIncentives,
@@ -66,6 +76,11 @@ export class CollectiveSDK {
    */
   public readonly holdings: HoldingsModule
 
+  /**
+   * Proposals module - functions related to DAO governance proposals
+   */
+  public readonly proposals: ProposalsModule
+
   constructor(config: CollectiveConfig) {
     this.logger = createLogger({ prefix: '[Collective]' })
     this.logger.debug('Initializing CollectiveSDK', { chainId: config.chainId })
@@ -81,6 +96,7 @@ export class CollectiveSDK {
 
     this.backing = this.createBackingModule()
     this.holdings = this.createHoldingsModule()
+    this.proposals = this.createProposalsModule()
 
     this.logger.info('CollectiveSDK initialized', { chainId: config.chainId })
   }
@@ -122,6 +138,25 @@ export class CollectiveSDK {
 
       getVotingPower: (userAddress: Address): Promise<VotingPower> =>
         getVotingPower(this.w3, this.addresses, userAddress),
+    }
+  }
+
+  /**
+   * Create the proposals module with bound methods
+   */
+  private createProposalsModule(): ProposalsModule {
+    return {
+      getStats: (): Promise<GovernorStats> =>
+        getGovernorStats(this.w3, this.addresses),
+
+      getProposals: (options?: { offset?: number; limit?: number }): Promise<ProposalsListResult> =>
+        getProposals(this.w3, this.addresses, options),
+
+      getProposal: (proposalId: string | bigint): Promise<Proposal | null> =>
+        getProposal(this.w3, this.addresses, proposalId),
+
+      getProposalDetails: (proposalId: string | bigint, options?: { fromBlock?: bigint }): Promise<Proposal | null> =>
+        getProposalDetails(this.w3, this.addresses, proposalId, options),
     }
   }
 

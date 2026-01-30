@@ -4,6 +4,7 @@ import type { TokenAmount, Percentage } from '@rsksmart/sdk-base'
 import type { ContractAddresses } from './contracts/addresses'
 import type { BackedBuildersResult } from './backing/getBackedBuilders'
 import type { TokenBalances, UnclaimedRewards, VotingPower } from './holdings'
+import type { GovernorStats, ProposalsListResult, Proposal } from './proposals'
 
 /**
  * Configuration for Collective SDK
@@ -126,4 +127,18 @@ export interface HoldingsModule {
   getUnclaimedRewards: (backerAddress: Address) => Promise<UnclaimedRewards>
   /** Get voting power (stRIF balance) for a user */
   getVotingPower: (userAddress: Address) => Promise<VotingPower>
+}
+
+/**
+ * Proposals module interface
+ */
+export interface ProposalsModule {
+  /** Get Governor contract statistics (proposal count, threshold, quorum) */
+  getStats: () => Promise<GovernorStats>
+  /** Get a paginated list of proposals */
+  getProposals: (options?: { offset?: number; limit?: number }) => Promise<ProposalsListResult>
+  /** Get basic information about a specific proposal (fast) */
+  getProposal: (proposalId: string | bigint) => Promise<Proposal | null>
+  /** Get full details including description and actions (requires event log search) */
+  getProposalDetails: (proposalId: string | bigint, options?: { fromBlock?: bigint }) => Promise<Proposal | null>
 }

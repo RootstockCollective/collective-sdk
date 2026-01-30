@@ -1,0 +1,136 @@
+/**
+ * Partial Governor ABI for reading proposal data
+ */
+export const GovernorAbi = [
+  // Events
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: false, internalType: 'uint256', name: 'proposalId', type: 'uint256' },
+      { indexed: false, internalType: 'address', name: 'proposer', type: 'address' },
+      { indexed: false, internalType: 'address[]', name: 'targets', type: 'address[]' },
+      { indexed: false, internalType: 'uint256[]', name: 'values', type: 'uint256[]' },
+      { indexed: false, internalType: 'string[]', name: 'signatures', type: 'string[]' },
+      { indexed: false, internalType: 'bytes[]', name: 'calldatas', type: 'bytes[]' },
+      { indexed: false, internalType: 'uint256', name: 'voteStart', type: 'uint256' },
+      { indexed: false, internalType: 'uint256', name: 'voteEnd', type: 'uint256' },
+      { indexed: false, internalType: 'string', name: 'description', type: 'string' },
+    ],
+    name: 'ProposalCreated',
+    type: 'event',
+  },
+  // Read functions
+  {
+    inputs: [],
+    name: 'proposalCount',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalDeadline',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalSnapshot',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalProposer',
+    outputs: [{ internalType: 'address', name: '', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalEta',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalNeedsQueuing',
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalVotes',
+    outputs: [
+      { internalType: 'uint256', name: 'againstVotes', type: 'uint256' },
+      { internalType: 'uint256', name: 'forVotes', type: 'uint256' },
+      { internalType: 'uint256', name: 'abstainVotes', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'proposalDetails',
+    outputs: [
+      { internalType: 'address[]', name: '', type: 'address[]' },
+      { internalType: 'uint256[]', name: '', type: 'uint256[]' },
+      { internalType: 'bytes[]', name: '', type: 'bytes[]' },
+      { internalType: 'bytes32', name: '', type: 'bytes32' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'index', type: 'uint256' }],
+    name: 'proposalDetailsAt',
+    outputs: [
+      { internalType: 'uint256', name: '', type: 'uint256' },
+      { internalType: 'address[]', name: '', type: 'address[]' },
+      { internalType: 'uint256[]', name: '', type: 'uint256[]' },
+      { internalType: 'bytes[]', name: '', type: 'bytes[]' },
+      { internalType: 'bytes32', name: '', type: 'bytes32' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'proposalId', type: 'uint256' }],
+    name: 'state',
+    outputs: [{ internalType: 'enum IGovernor.ProposalState', name: '', type: 'uint8' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'blockNumber', type: 'uint256' }],
+    name: 'quorum',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'proposalThreshold',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'quorumNumerator',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'quorumDenominator',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+] as const

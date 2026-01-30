@@ -17,11 +17,25 @@ export type {
   BackerRewardPercentage,
   BackingModule,
   HoldingsModule,
+  ProposalsModule,
 } from './types'
 
 export type { BackedBuilder, BackedBuildersResult } from './backing/getBackedBuilders'
 
 export type { TokenBalances, UnclaimedRewards, VotingPower } from './holdings'
+
+export {
+  ProposalState,
+  ProposalStateLabels,
+  ProposalCategory,
+  type GovernorStats,
+  type ProposalVotes,
+  type ProposalBasic,
+  type Proposal,
+  type ProposalSummary,
+  type ProposalsListResult,
+  type ProposalAction,
+} from './proposals'
 
 export {
   getContractAddresses,
