@@ -1,11 +1,10 @@
 import type { Address } from 'viem'
 import type { W3LayerInstance } from '@rsksmart/w3layer'
-import { toTokenAmount } from '@rsksmart/sdk-base'
+import { toTokenAmount, TOKEN_DECIMALS } from '@rsksmart/sdk-base'
 import type { ContractAddresses } from '../contracts/addresses'
 import { BackersManagerAbi, BuilderRegistryAbi, GaugeAbi } from '../contracts/abis'
 import type { TotalBacking } from '../types'
 
-const STRIF_DECIMALS = 18
 const STRIF_SYMBOL = 'stRIF'
 
 /**
@@ -37,7 +36,7 @@ export async function getTotalBacking(
 
   if (gaugesLength === 0n || totalAllocation === 0n) {
     return {
-      amount: toTokenAmount(totalAllocation, STRIF_DECIMALS, STRIF_SYMBOL),
+      amount: toTokenAmount(totalAllocation, TOKEN_DECIMALS.stRIF, STRIF_SYMBOL),
       buildersCount: 0,
     }
   }
@@ -64,7 +63,7 @@ export async function getTotalBacking(
   ).length
 
   return {
-    amount: toTokenAmount(totalAllocation, STRIF_DECIMALS, STRIF_SYMBOL),
+    amount: toTokenAmount(totalAllocation, TOKEN_DECIMALS.stRIF, STRIF_SYMBOL),
     buildersCount,
   }
 }

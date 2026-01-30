@@ -1,11 +1,10 @@
 import type { Address } from 'viem'
 import type { W3LayerInstance } from '@rsksmart/w3layer'
-import { toTokenAmount } from '@rsksmart/sdk-base'
+import { toTokenAmount, TOKEN_DECIMALS } from '@rsksmart/sdk-base'
 import type { ContractAddresses } from '../contracts/addresses'
 import { StRIFTokenAbi, BackersManagerAbi } from '../contracts/abis'
 import type { AvailableForBacking } from '../types'
 
-const STRIF_DECIMALS = 18
 const STRIF_SYMBOL = 'stRIF'
 
 /**
@@ -36,16 +35,16 @@ export async function getAvailableForBacking(
         args: [backerAddress],
       },
     ],
-    allowFailure: false,
+    allowFailure: true,
   })
 
-  const balance = results[0]?.result as bigint ?? 0n
-  const totalAllocated = results[1]?.result as bigint ?? 0n
+  const balance = (results[0]?.status === 'success' ? results[0].result : 0n) as bigint
+  const totalAllocated = (results[1]?.status === 'success' ? results[1].result : 0n) as bigint
   const available = balance > totalAllocated ? balance - totalAllocated : 0n
 
   return {
-    balance: toTokenAmount(balance, STRIF_DECIMALS, STRIF_SYMBOL),
-    totalAllocated: toTokenAmount(totalAllocated, STRIF_DECIMALS, STRIF_SYMBOL),
-    available: toTokenAmount(available, STRIF_DECIMALS, STRIF_SYMBOL),
+    balance: toTokenAmount(balance, TOKEN_DECIMALS.stRIF, STRIF_SYMBOL),
+    totalAllocated: toTokenAmount(totalAllocated, TOKEN_DECIMALS.stRIF, STRIF_SYMBOL),
+    available: toTokenAmount(available, TOKEN_DECIMALS.stRIF, STRIF_SYMBOL),
   }
 }

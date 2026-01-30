@@ -12,10 +12,21 @@ import {
   getBackersIncentives,
   getBuilders,
   getBuilder,
+  getBackedBuilders,
+  type BackedBuildersResult,
 } from './backing'
+import {
+  getBalances,
+  getUnclaimedRewards,
+  getVotingPower,
+  type TokenBalances,
+  type UnclaimedRewards,
+  type VotingPower,
+} from './holdings'
 import type {
   CollectiveConfig,
   BackingModule,
+  HoldingsModule,
   AvailableForBacking,
   TotalBacking,
   BackersIncentives,
@@ -50,6 +61,11 @@ export class CollectiveSDK {
    */
   public readonly backing: BackingModule
 
+  /**
+   * Holdings module - functions related to user balances and rewards
+   */
+  public readonly holdings: HoldingsModule
+
   constructor(config: CollectiveConfig) {
     this.logger = createLogger({ prefix: '[Collective]' })
     this.logger.debug('Initializing CollectiveSDK', { chainId: config.chainId })
@@ -64,6 +80,7 @@ export class CollectiveSDK {
       : getContractAddresses(config.chainId)
 
     this.backing = this.createBackingModule()
+    this.holdings = this.createHoldingsModule()
 
     this.logger.info('CollectiveSDK initialized', { chainId: config.chainId })
   }
@@ -86,6 +103,25 @@ export class CollectiveSDK {
 
       getBuilder: (builderAddress: Address): Promise<Builder | null> =>
         getBuilder(this.w3, this.addresses, builderAddress),
+
+      getBackedBuilders: (backerAddress: Address): Promise<BackedBuildersResult> =>
+        getBackedBuilders(this.w3, this.addresses, backerAddress),
+    }
+  }
+
+  /**
+   * Create the holdings module with bound methods
+   */
+  private createHoldingsModule(): HoldingsModule {
+    return {
+      getBalances: (userAddress: Address): Promise<TokenBalances> =>
+        getBalances(this.w3, this.addresses, userAddress),
+
+      getUnclaimedRewards: (backerAddress: Address): Promise<UnclaimedRewards> =>
+        getUnclaimedRewards(this.w3, this.addresses, backerAddress),
+
+      getVotingPower: (userAddress: Address): Promise<VotingPower> =>
+        getVotingPower(this.w3, this.addresses, userAddress),
     }
   }
 

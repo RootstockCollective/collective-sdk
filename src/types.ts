@@ -2,6 +2,8 @@ import type { Address } from 'viem'
 import type { RootstockChainId } from '@rsksmart/w3layer'
 import type { TokenAmount, Percentage } from '@rsksmart/sdk-base'
 import type { ContractAddresses } from './contracts/addresses'
+import type { BackedBuildersResult } from './backing/getBackedBuilders'
+import type { TokenBalances, UnclaimedRewards, VotingPower } from './holdings'
 
 /**
  * Configuration for Collective SDK
@@ -110,4 +112,18 @@ export interface BackingModule {
   getBuilders: () => Promise<Builder[]>
   /** Get a specific builder by address */
   getBuilder: (builderAddress: Address) => Promise<Builder | null>
+  /** Get list of builders that a user is backing with their allocations */
+  getBackedBuilders: (backerAddress: Address) => Promise<BackedBuildersResult>
+}
+
+/**
+ * Holdings module interface
+ */
+export interface HoldingsModule {
+  /** Get token balances (RIF, stRIF, USDRIF, RBTC) for a user */
+  getBalances: (userAddress: Address) => Promise<TokenBalances>
+  /** Get unclaimed rewards for a backer */
+  getUnclaimedRewards: (backerAddress: Address) => Promise<UnclaimedRewards>
+  /** Get voting power (stRIF balance) for a user */
+  getVotingPower: (userAddress: Address) => Promise<VotingPower>
 }

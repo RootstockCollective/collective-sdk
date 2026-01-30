@@ -16,7 +16,12 @@ export type {
   BuilderStateFlags,
   BackerRewardPercentage,
   BackingModule,
+  HoldingsModule,
 } from './types'
+
+export type { BackedBuilder, BackedBuildersResult } from './backing/getBackedBuilders'
+
+export type { TokenBalances, UnclaimedRewards, VotingPower } from './holdings'
 
 export {
   getContractAddresses,
