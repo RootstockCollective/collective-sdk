@@ -37,11 +37,29 @@ import {
   hasVoted,
   getProposalState,
   VoteSupport,
+  // Proposal creation
+  createProposal,
+  createTreasuryTransferProposal,
+  createBuilderWhitelistProposal,
+  createBuilderRemovalProposal,
+  canCreateProposal,
+  isBuilderWhitelisted,
+  buildProposal,
+  buildTreasuryTransferProposal,
+  buildBuilderWhitelistProposal,
+  buildBuilderRemovalProposal,
+  buildCustomProposal,
   type GovernorStats,
   type ProposalsListResult,
   type Proposal,
   type VoteResult,
   type CastVoteOptions,
+  type CanCreateProposalResult,
+  type TreasuryTransferOptions,
+  type BuilderWhitelistOptions,
+  type BuilderRemovalOptions,
+  type CustomProposalOptions,
+  type ProposalData,
 } from './proposals'
 import type {
   CollectiveConfig,
@@ -192,6 +210,33 @@ export class CollectiveSDK {
         options?: CastVoteOptions
       ): Promise<VoteResult> =>
         castVote(this.w3, this.addresses, walletClient, proposalId, support, options),
+
+      canCreateProposal: (userAddress: Address): Promise<CanCreateProposalResult> =>
+        canCreateProposal(this.w3, this.addresses, userAddress),
+
+      isBuilderWhitelisted: (builderAddress: Address): Promise<boolean> =>
+        isBuilderWhitelisted(this.w3, this.addresses, builderAddress),
+
+      createProposal: (walletClient: WalletClient, proposal: ProposalData) =>
+        createProposal(this.w3, this.addresses, walletClient, proposal),
+
+      createTreasuryTransferProposal: (walletClient: WalletClient, options: TreasuryTransferOptions) =>
+        createTreasuryTransferProposal(this.w3, this.addresses, walletClient, options),
+
+      createBuilderWhitelistProposal: (walletClient: WalletClient, options: BuilderWhitelistOptions) =>
+        createBuilderWhitelistProposal(this.w3, this.addresses, walletClient, options),
+
+      createBuilderRemovalProposal: (walletClient: WalletClient, options: BuilderRemovalOptions) =>
+        createBuilderRemovalProposal(this.w3, this.addresses, walletClient, options),
+
+      buildProposal,
+      buildTreasuryTransferProposal: (options: TreasuryTransferOptions) =>
+        buildTreasuryTransferProposal(this.addresses, options),
+      buildBuilderWhitelistProposal: (options: BuilderWhitelistOptions) =>
+        buildBuilderWhitelistProposal(this.addresses, options),
+      buildBuilderRemovalProposal: (options: BuilderRemovalOptions) =>
+        buildBuilderRemovalProposal(this.addresses, options),
+      buildCustomProposal,
     }
   }
 

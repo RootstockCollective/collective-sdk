@@ -33,7 +33,7 @@
     "staking",
     "backing"
   ],
-  "author": "RootstockCollective",
+  "author": "Sebastian Guaqueta",
   "license": "MIT",
   "dependencies": {
     "@rsksmart/w3layer": "*",

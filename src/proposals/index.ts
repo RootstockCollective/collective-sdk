@@ -5,6 +5,34 @@ export { getProposalDetails } from './getProposalDetails'
 export { castVote, hasVoted, getProposalState, type CastVoteOptions } from './castVote'
 
 export {
+  // Proposal creation
+  createProposal,
+  createTreasuryTransferProposal,
+  createBuilderWhitelistProposal,
+  createBuilderRemovalProposal,
+  // Proposal builders
+  buildProposal,
+  buildTreasuryTransferProposal,
+  buildBuilderWhitelistProposal,
+  buildBuilderRemovalProposal,
+  buildCustomProposal,
+  // Helpers
+  hashDescription,
+  encodeGovernorRelay,
+  canCreateProposal,
+  isBuilderWhitelisted,
+  // Types
+  type ProposalParams,
+  type Proposal as ProposalData,
+  type CanCreateProposalResult,
+  type TreasuryTransferToken,
+  type TreasuryTransferOptions,
+  type BuilderWhitelistOptions,
+  type BuilderRemovalOptions,
+  type CustomProposalOptions,
+} from './createProposal'
+
+export {
   parseProposalDescription,
   extractDiscourseUrl,
   determineProposalCategory,

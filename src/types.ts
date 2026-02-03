@@ -11,7 +11,14 @@ import {
   type ProposalsListResult,
   type Proposal,
   type VoteResult,
+  type CanCreateProposalResult,
+  type TreasuryTransferOptions,
+  type BuilderWhitelistOptions,
+  type BuilderRemovalOptions,
+  type CustomProposalOptions,
+  type ProposalData,
 } from './proposals'
+import type { WriteContractResult } from '@rsksmart/w3layer'
 
 /**
  * Configuration for Collective SDK
@@ -201,4 +208,76 @@ export interface ProposalsModule {
     support: VoteSupport,
     options?: { reason?: string; skipValidation?: boolean }
   ) => Promise<VoteResult>
+
+  /**
+   * Check if a user can create proposals (has enough voting power)
+   * @param userAddress - Address to check
+   */
+  canCreateProposal: (userAddress: Address) => Promise<CanCreateProposalResult>
+
+  /**
+   * Check if a builder is already whitelisted
+   * @param builderAddress - Builder address to check
+   */
+  isBuilderWhitelisted: (builderAddress: Address) => Promise<boolean>
+
+  /**
+   * Create a custom proposal
+   * @param walletClient - Wallet for signing
+   * @param proposal - Proposal data (targets, values, calldatas, description)
+   */
+  createProposal: (
+    walletClient: import('viem').WalletClient,
+    proposal: ProposalData
+  ) => Promise<WriteContractResult>
+
+  /**
+   * Create a treasury transfer proposal
+   * @param walletClient - Wallet for signing
+   * @param options - Transfer options (token, recipient, amount, description)
+   */
+  createTreasuryTransferProposal: (
+    walletClient: import('viem').WalletClient,
+    options: TreasuryTransferOptions
+  ) => Promise<WriteContractResult>
+
+  /**
+   * Create a builder whitelist proposal
+   * @param walletClient - Wallet for signing
+   * @param options - Whitelist options (builderAddress, description)
+   */
+  createBuilderWhitelistProposal: (
+    walletClient: import('viem').WalletClient,
+    options: BuilderWhitelistOptions
+  ) => Promise<WriteContractResult>
+
+  /**
+   * Create a builder removal proposal
+   * @param walletClient - Wallet for signing
+   * @param options - Removal options (builderAddress, description)
+   */
+  createBuilderRemovalProposal: (
+    walletClient: import('viem').WalletClient,
+    options: BuilderRemovalOptions
+  ) => Promise<WriteContractResult>
+
+  /** Build a proposal object from raw params */
+  buildProposal: (
+    targets: Address[],
+    values: bigint[],
+    calldatas: `0x${string}`[],
+    description: string
+  ) => ProposalData
+
+  /** Build a treasury transfer proposal object */
+  buildTreasuryTransferProposal: (options: TreasuryTransferOptions) => ProposalData
+
+  /** Build a builder whitelist proposal object */
+  buildBuilderWhitelistProposal: (options: BuilderWhitelistOptions) => ProposalData
+
+  /** Build a builder removal proposal object */
+  buildBuilderRemovalProposal: (options: BuilderRemovalOptions) => ProposalData
+
+  /** Build a custom proposal object */
+  buildCustomProposal: (options: CustomProposalOptions) => ProposalData
 }

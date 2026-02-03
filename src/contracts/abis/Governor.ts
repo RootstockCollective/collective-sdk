@@ -22,6 +22,29 @@ export const GovernorAbi = [
   // Write functions
   {
     inputs: [
+      { internalType: 'address[]', name: 'targets', type: 'address[]' },
+      { internalType: 'uint256[]', name: 'values', type: 'uint256[]' },
+      { internalType: 'bytes[]', name: 'calldatas', type: 'bytes[]' },
+      { internalType: 'string', name: 'description', type: 'string' },
+    ],
+    name: 'propose',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'target', type: 'address' },
+      { internalType: 'uint256', name: 'value', type: 'uint256' },
+      { internalType: 'bytes', name: 'data', type: 'bytes' },
+    ],
+    name: 'relay',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
       { internalType: 'uint256', name: 'proposalId', type: 'uint256' },
       { internalType: 'uint8', name: 'support', type: 'uint8' },
     ],

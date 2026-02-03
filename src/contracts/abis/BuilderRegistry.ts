@@ -212,4 +212,30 @@ export const BuilderRegistryAbi = [
     ],
     stateMutability: 'view',
   },
+  {
+    type: 'function',
+    name: 'communityApproveBuilder',
+    inputs: [
+      {
+        name: 'builder_',
+        type: 'address',
+        internalType: 'address',
+      },
+    ],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'revokeBuilderKYC',
+    inputs: [
+      {
+        name: 'builder_',
+        type: 'address',
+        internalType: 'address',
+      },
+    ],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
 ] as const
