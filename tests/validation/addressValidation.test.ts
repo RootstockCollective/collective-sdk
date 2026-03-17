@@ -2,10 +2,12 @@ import { describe, it, expect } from 'vitest'
 import { getAvailableForBacking } from '../../src/backing/getAvailableForBacking'
 import { getTotalBacking } from '../../src/backing/getTotalBacking'
 import { getBackedBuilders } from '../../src/backing/getBackedBuilders'
+import { getBuilder } from '../../src/backing/getBuilders'
 import { getBalances } from '../../src/holdings/getBalances'
 import { getUnclaimedRewards } from '../../src/holdings/getUnclaimedRewards'
 import { getVotingPower } from '../../src/holdings/getVotingPower'
 import { getClaimableRewardsInfo } from '../../src/holdings/claimRewards'
+import { getDetailedRewardsList } from '../../src/holdings/getDetailedRewardsList'
 import { hasVoted } from '../../src/proposals/castVote'
 import { canCreateProposal, isBuilderWhitelisted } from '../../src/proposals/createProposal'
 import { createTestW3 } from '../setup'
@@ -35,6 +37,16 @@ describe('Address validation across all modules', () => {
       const w3 = createTestW3()
       await expect(getBackedBuilders(w3, mockAddresses, INVALID_ADDRESS)).rejects.toThrow('Invalid address')
     })
+
+    it('getBuilder rejects invalid address', async () => {
+      const w3 = createTestW3()
+      await expect(getBuilder(w3, mockAddresses, INVALID_ADDRESS)).rejects.toThrow('Invalid address')
+    })
+
+    it('getBuilder rejects short address', async () => {
+      const w3 = createTestW3()
+      await expect(getBuilder(w3, mockAddresses, SHORT_ADDRESS)).rejects.toThrow('Invalid address')
+    })
   })
 
   describe('Holdings module', () => {
@@ -56,6 +68,16 @@ describe('Address validation across all modules', () => {
     it('getClaimableRewardsInfo rejects invalid address', async () => {
       const w3 = createTestW3()
       await expect(getClaimableRewardsInfo(w3, mockAddresses, INVALID_ADDRESS)).rejects.toThrow('Invalid address')
+    })
+
+    it('getDetailedRewardsList rejects invalid address', async () => {
+      const w3 = createTestW3()
+      await expect(getDetailedRewardsList(w3, mockAddresses, INVALID_ADDRESS)).rejects.toThrow('Invalid address')
+    })
+
+    it('getDetailedRewardsList rejects short address', async () => {
+      const w3 = createTestW3()
+      await expect(getDetailedRewardsList(w3, mockAddresses, SHORT_ADDRESS)).rejects.toThrow('Invalid address')
     })
   })
 

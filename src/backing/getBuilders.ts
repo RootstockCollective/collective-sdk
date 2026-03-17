@@ -3,6 +3,7 @@ import type { W3LayerInstance } from '@rsksmart/w3layer'
 import type { ContractAddresses } from '../contracts/addresses'
 import { BuilderRegistryAbi, GaugeAbi } from '../contracts/abis'
 import type { Builder, BuilderStateFlags, BackerRewardPercentage } from '../types'
+import { validateAddress } from '@rsksmart/sdk-base'
 
 /**
  * Get list of all builders
@@ -152,6 +153,8 @@ export async function getBuilder(
   addresses: ContractAddresses,
   builderAddress: Address
 ): Promise<Builder | null> {
+  validateAddress(builderAddress)
+
   try {
     const gauge = await w3.readContract<Address>({
       address: addresses.builderRegistry,
