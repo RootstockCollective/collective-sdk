@@ -543,7 +543,7 @@ We welcome contributions from the community. Please fork the repository and subm
 
 For any questions or support, please open an issue on the repository or reach out to the maintainers.
 
-# Disclaimer
+## Disclaimer
 
 The software provided in this GitHub repository is offered "as is," without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.
 
