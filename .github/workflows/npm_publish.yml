@@ -64,7 +64,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f #v6.3.0
         with:
-          node-version: 23
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       # npm ci requires package-lock.json; use npm install when the lockfile is not committed
@@ -79,7 +79,7 @@ jobs:
           fi
 
       - name: Update npm
-        run: npm install -g npm@11.5.1
+        run: npm install -g npm@11.11.0
 
       - name: Build
         run: npm run build
