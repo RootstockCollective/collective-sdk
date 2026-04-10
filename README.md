@@ -1,22 +1,22 @@
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/rsksmart/collective-sdk/badge)](https://scorecard.dev/viewer/?uri=github.com/rsksmart/collective-sdk)
-[![CodeQL](https://github.com/rsksmart/collective-sdk/workflows/CodeQL/badge.svg)](https://github.com/rsksmart/collective-sdk/actions?query=workflow%3ACodeQL)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/RootstockCollective/collective-sdk/badge)](https://scorecard.dev/viewer/?uri=github.com/RootstockCollective/collective-sdk)
+[![CodeQL](https://github.com/RootstockCollective/collective-sdk/workflows/CodeQL/badge.svg)](https://github.com/RootstockCollective/collective-sdk/actions?query=workflow%3ACodeQL)
 
 <img src="rootstock-logo.png" alt="RSK Logo" style="width:100%; height: auto;" />
 
-# @rsksmart/collective-sdk
+# @RootstockCollective/collective-sdk
 
 SDK for interacting with the Rootstock Collective DAO protocol. This SDK provides a simple interface for backing builders, governance (proposals and voting), staking, and rewards management.
 
 ## Installation
 
 ```bash
-npm install @rsksmart/collective-sdk viem
+npm install @RootstockCollective/collective-sdk viem
 ```
 
 ## Quick Start
 
 ```typescript
-import { CollectiveSDK } from '@rsksmart/collective-sdk'
+import { CollectiveSDK } from '@RootstockCollective/collective-sdk'
 import { parseEther } from 'viem'
 
 // Initialize SDK
@@ -357,7 +357,7 @@ const proposal = await sdk.proposals.getProposalDetails('123456...', {
 Cast a vote on a proposal.
 
 ```typescript
-import { VoteSupport } from '@rsksmart/collective-sdk'
+import { VoteSupport } from '@RootstockCollective/collective-sdk'
 
 const result = await sdk.proposals.castVote(
   walletClient,
@@ -413,7 +413,7 @@ const tx = await sdk.proposals.createBuilderWhitelistProposal(walletClient, {
 ## Full Example
 
 ```typescript
-import { CollectiveSDK, VoteSupport } from '@rsksmart/collective-sdk'
+import { CollectiveSDK, VoteSupport } from '@RootstockCollective/collective-sdk'
 import { createWalletClient, createPublicClient, http, parseEther } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { rootstockTestnet } from 'viem/chains'
@@ -510,13 +510,13 @@ import type {
   ProposalState,
   VoteSupport,
   // ... and more
-} from '@rsksmart/collective-sdk'
+} from '@RootstockCollective/collective-sdk'
 ```
 
 ## Enums
 
 ```typescript
-import { ProposalState, VoteSupport } from '@rsksmart/collective-sdk'
+import { ProposalState, VoteSupport } from '@RootstockCollective/collective-sdk'
 
 // Proposal states
 ProposalState.Pending

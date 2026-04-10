@@ -1,6 +1,6 @@
 # Contributing
 
-## How to contribute to RSK
+## How to contribute to RootstockCollective SDK
 
 These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
@@ -15,7 +15,7 @@ Continued code reviews and audits are required for security. As such, we encoura
 
 A code contribution process starts with someone identifying a need for writing code. If you're thinking about making your first contribution, we suggest you take a moment to get in touch and see how your idea fits in the development plan:
 
-- Is it a bug in our [issue tracker](https://github.com/rsksmart/collective-sdk/issues)?
+- Is it a bug in our [issue tracker](https://github.com/RootstockCollective/collective-sdk/issues)?
 - Is it a novel idea that should be proposed and discussed first?
 
 #### Review process
