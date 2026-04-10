@@ -1,5 +1,5 @@
 /**
- * @rsksmart/collective
+ * @RootstockCollective/collective-sdk
  *
  * Rootstock Collective DAO SDK
  * Interact with the Collective DAO protocol for backing, governance, and rewards.

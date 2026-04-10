@@ -90,7 +90,7 @@ import type {
  *
  * @example
  * ```ts
- * import { CollectiveSDK } from '@rsksmart/collective'
+ * import { CollectiveSDK } from '@RootstockCollective/collective-sdk'
  *
  * const sdk = new CollectiveSDK({ chainId: 30 })
  *
