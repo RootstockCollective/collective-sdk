@@ -2,7 +2,6 @@
   "name": "@rootstockcollective/collective-sdk",
   "version": "0.4.0",
   "publishConfig": {
-    "access": "public",
     "registry": "https://registry.npmjs.org"
   },
   "description": "Rootstock Collective DAO SDK - Interact with the Collective DAO protocol",
@@ -57,6 +56,6 @@
     "typescript": ">=5.0.0"
   },
   "engines": {
-    "node": ">=23.0.0"
+    "node": ">=18.0.0"
   }
 }
