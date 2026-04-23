@@ -62,9 +62,9 @@ jobs:
         run: exit 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af #v4.1.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f #v6.3.0
         with:
-          node-version: 20
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       # npm ci requires package-lock.json; use npm install when the lockfile is not committed
@@ -79,7 +79,7 @@ jobs:
           fi
 
       - name: Update npm
-        run: npm install -g npm@latest
+        run: npm install -g npm@11.11.0
 
       - name: Build
         run: npm run build
